@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coresync.controllers.LoginController">
-    <padding>
-        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
-    </padding>
-
-    <Label text="CoreSync — Login" textFill="#193c78">
-        <font>
-            <Font name="System Bold" size="24.0" />
-        </font>
-    </Label>
-
-    <TextField fx:id="idField" promptText="Employee ID" />
-    <PasswordField fx:id="passField" promptText="Password" />
-    
-    <Button onAction="#handleLoginButtonAction" text="Login" style="-fx-background-color: #193c78; -fx-text-fill: white;" prefWidth="200.0"/>
-    
-    <Label fx:id="messageLabel" textFill="RED" />
-</VBox>
+<StackPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #1282a2, #f77f00);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coresync.controllers.LoginController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="400.0" maxWidth="350.0" spacing="15.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 15, 0, 0, 8);">
+         <padding>
+            <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+         </padding>
+         <children>
+            <ImageView fitHeight="110.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logo.png" />
+               </image>
+            </ImageView>
+            <Label text="Secure Login" textFill="#034078">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="idField" promptText="Employee ID" style="-fx-background-radius: 5; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-padding: 8;" />
+            <PasswordField fx:id="passField" promptText="Password" style="-fx-background-radius: 5; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-padding: 8;" />
+            <Button onAction="#handleLoginButtonAction" prefHeight="40.0" prefWidth="270.0" style="-fx-background-color: linear-gradient(to right, #0099cc, #034078); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;" text="SIGN IN">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Label fx:id="messageLabel" textFill="#d62828" />
+         </children>
+      </VBox>
+   </children>
+</StackPane>
