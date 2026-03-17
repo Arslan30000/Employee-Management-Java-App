@@ -8,7 +8,7 @@ Developed by undergraduate CS students at FAST NUCES, Islamabad:
 * **Masab Tahir** - Developer / Tester 
 * **Abdul Mateen** - UI Designer / Analyst/ Developer
 
-##  Features (Sprint 1)
+##  Features 
 * **Secure Authentication:** Role-based login system for HR Admins and Employees.
 * **Admin Dashboard:** Restricts unauthorized access and allows HR to register new employees.
 * **Employee Dashboard:** Allows standard users to view their current profile and leave balances securely.
