@@ -1,0 +1,3 @@
+com\coresync\services\AuthService.class
+com\coresync\App.class
+com\coresync\controllers\LoginController.class
