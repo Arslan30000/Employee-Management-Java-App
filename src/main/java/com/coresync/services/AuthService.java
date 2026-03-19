@@ -16,7 +16,15 @@ public class AuthService {
                 .POST(HttpRequest.BodyPublishers.ofString(jsonInput))
                 .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        return response.body(); 
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("API Response Status: " + response.statusCode());
+            System.out.println("API Response Body: " + response.body());
+            return response.body();
+        } catch (Exception e) {
+            System.err.println("Authentication Error: " + e.getMessage());
+            e.printStackTrace();
+            throw new Exception("Failed to connect to authentication server. Make sure XAMPP/PHP backend is running at http://localhost/payroll_api/login.php", e);
+        }
     }
 }

@@ -9,6 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -19,18 +22,63 @@ import java.net.http.HttpResponse;
 
 public class AdminController {
 
+    @FXML private GridPane dashboardGrid;
+    @FXML private VBox dashboardVBox;
+    @FXML private VBox addEmployeeForm;
     @FXML private TextField empIdField;
     @FXML private TextField nameField;
     @FXML private ComboBox<String> roleComboBox;
     @FXML private TextField salaryField;
     @FXML private PasswordField passField;
     @FXML private Label statusLabel;
+    
+    @FXML private VBox addEmployeeCard;
+    @FXML private VBox manageEmployeesCard;
+    @FXML private VBox leaveManagementCard;
+    @FXML private VBox payrollManagementCard;
 
     @FXML
     public void initialize() {
         // Populate the dropdown menu
-        roleComboBox.getItems().addAll("EMPLOYEE", "HR Admin");
-        roleComboBox.getSelectionModel().selectFirst();
+        if (roleComboBox != null) {
+            roleComboBox.getItems().addAll("EMPLOYEE", "HR Admin");
+            roleComboBox.getSelectionModel().selectFirst();
+        }
+        
+        setupCardHoverEffects(addEmployeeCard);
+        setupCardHoverEffects(manageEmployeesCard);
+        setupCardHoverEffects(leaveManagementCard);
+        setupCardHoverEffects(payrollManagementCard);
+    }
+    
+    private void setupCardHoverEffects(VBox card) {
+        if (card != null) {
+            card.setOnMouseEntered(e -> card.setStyle("-fx-background-color: #fcfcfc; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 5); -fx-cursor: hand; -fx-border-color: #f77f00 transparent transparent transparent; -fx-border-width: 4 0 0 0;"));
+            card.setOnMouseExited(e -> card.setStyle("-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 15, 0, 0, 5); -fx-cursor: hand; -fx-border-color: #f77f00 transparent transparent transparent; -fx-border-width: 4 0 0 0;"));
+        }
+    }
+
+    @FXML
+    protected void showAddEmployeeForm() {
+        if (dashboardVBox != null) dashboardVBox.setVisible(false);
+        if (dashboardGrid != null) dashboardGrid.setVisible(false);
+        if (addEmployeeForm != null) addEmployeeForm.setVisible(true);
+    }
+
+    @FXML
+    protected void showDashboard() {
+        if (addEmployeeForm != null) addEmployeeForm.setVisible(false);
+        if (dashboardGrid != null) dashboardGrid.setVisible(true);
+        if (dashboardVBox != null) dashboardVBox.setVisible(true);
+    }
+
+    @FXML
+    protected void showFeatureNotImplemented() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("This feature will be implemented later");
+        alert.showAndWait();
     }
 
     @FXML
