@@ -1,16 +1,15 @@
 package com.coresync.controllers;
 
 import com.coresync.services.UserSession;
-import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.animation.ScaleTransition;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -22,7 +21,6 @@ import java.net.http.HttpResponse;
 
 public class AdminController {
 
-    @FXML private GridPane dashboardGrid;
     @FXML private VBox dashboardVBox;
     @FXML private VBox addEmployeeForm;
     @FXML private TextField empIdField;
@@ -32,10 +30,15 @@ public class AdminController {
     @FXML private PasswordField passField;
     @FXML private Label statusLabel;
     
-    @FXML private VBox addEmployeeCard;
-    @FXML private VBox manageEmployeesCard;
-    @FXML private VBox leaveManagementCard;
-    @FXML private VBox payrollManagementCard;
+    @FXML private HBox dashboardBtn;
+    @FXML private HBox addEmployeeBtn;
+    @FXML private HBox manageEmployeesBtn;
+    @FXML private HBox leaveManagementBtn;
+    @FXML private HBox payrollManagementBtn;
+    
+    @FXML private HBox quickActionAddEmployee;
+    @FXML private HBox quickActionLeave;
+    @FXML private HBox quickActionPayroll;
 
     @FXML
     public void initialize() {
@@ -45,30 +48,56 @@ public class AdminController {
             roleComboBox.getSelectionModel().selectFirst();
         }
         
-        setupCardHoverEffects(addEmployeeCard);
-        setupCardHoverEffects(manageEmployeesCard);
-        setupCardHoverEffects(leaveManagementCard);
-        setupCardHoverEffects(payrollManagementCard);
+        setupSmoothScale(quickActionAddEmployee);
+        setupSmoothScale(quickActionLeave);
+        setupSmoothScale(quickActionPayroll);
+        
+        setActiveSidebarButton(dashboardBtn);
     }
     
-    private void setupCardHoverEffects(VBox card) {
-        if (card != null) {
-            card.setOnMouseEntered(e -> card.setStyle("-fx-background-color: #fcfcfc; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 5); -fx-cursor: hand; -fx-border-color: #f77f00 transparent transparent transparent; -fx-border-width: 4 0 0 0;"));
-            card.setOnMouseExited(e -> card.setStyle("-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 15, 0, 0, 5); -fx-cursor: hand; -fx-border-color: #f77f00 transparent transparent transparent; -fx-border-width: 4 0 0 0;"));
+    private void setupSmoothScale(javafx.scene.Node node) {
+        if (node == null) return;
+        ScaleTransition scaleIn = new ScaleTransition(Duration.millis(200), node);
+        scaleIn.setToX(1.03);
+        scaleIn.setToY(1.03);
+        
+        ScaleTransition scaleOut = new ScaleTransition(Duration.millis(200), node);
+        scaleOut.setToX(1.0);
+        scaleOut.setToY(1.0);
+        
+        node.setOnMouseEntered(e -> {
+            scaleOut.stop();
+            scaleIn.playFromStart();
+        });
+        node.setOnMouseExited(e -> {
+            scaleIn.stop();
+            scaleOut.playFromStart();
+        });
+    }
+
+    private void setActiveSidebarButton(HBox activeBtn) {
+        HBox[] allBtns = {dashboardBtn, addEmployeeBtn, manageEmployeesBtn, leaveManagementBtn, payrollManagementBtn};
+        for (HBox btn : allBtns) {
+            if (btn != null) {
+                btn.getStyleClass().remove("sidebar-btn-active");
+            }
+        }
+        if (activeBtn != null && !activeBtn.getStyleClass().contains("sidebar-btn-active")) {
+            activeBtn.getStyleClass().add("sidebar-btn-active");
         }
     }
 
     @FXML
     protected void showAddEmployeeForm() {
+        setActiveSidebarButton(addEmployeeBtn);
         if (dashboardVBox != null) dashboardVBox.setVisible(false);
-        if (dashboardGrid != null) dashboardGrid.setVisible(false);
         if (addEmployeeForm != null) addEmployeeForm.setVisible(true);
     }
 
     @FXML
     protected void showDashboard() {
+        setActiveSidebarButton(dashboardBtn);
         if (addEmployeeForm != null) addEmployeeForm.setVisible(false);
-        if (dashboardGrid != null) dashboardGrid.setVisible(true);
         if (dashboardVBox != null) dashboardVBox.setVisible(true);
     }
 
@@ -133,22 +162,38 @@ public class AdminController {
 
     @FXML
     protected void handleLogout(ActionEvent event) {
+        performLogout();
+    }
+    
+    @FXML
+    protected void handleLogoutAsMouseEvent(MouseEvent event) {
+        performLogout();
+    }
+    
+    private void performLogout() {
         UserSession.clear();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/coresync/login.fxml"));
-            Scene currentScene = ((Node) event.getSource()).getScene();
-            Stage stage = (Stage) currentScene.getWindow();
+            // Check if login.fxml exists and load it
+            java.net.URL resource = getClass().getResource("/com/coresync/login.fxml");
+            if (resource == null) return;
+            Parent root = FXMLLoader.load(resource);
             
-            // Set up the new scene
-            Scene newScene = new Scene(root, 800, 500);
-            stage.setScene(newScene);
-            stage.centerOnScreen();
-
-            // Animate fading back to login
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(800), root);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            fadeIn.play();
+            // Get current stage from any node
+            Stage stage = null;
+            if (dashboardVBox != null && dashboardVBox.getScene() != null) {
+                stage = (Stage) dashboardVBox.getScene().getWindow();
+            }
+            
+            if (stage != null) {
+                Scene newScene = new Scene(root, 800, 500);
+                stage.setScene(newScene);
+                stage.centerOnScreen();
+    
+                javafx.animation.FadeTransition fadeIn = new javafx.animation.FadeTransition(Duration.millis(800), root);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

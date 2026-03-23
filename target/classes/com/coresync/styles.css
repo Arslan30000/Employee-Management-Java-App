@@ -1,0 +1,170 @@
+/* Typography and Colors */
+.root {
+    -fx-font-family: "Inter", "Segoe UI", sans-serif;
+    -fx-background-color: #F8FAFC; /* Light gray background */
+}
+
+/* Navbar */
+.navbar {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.04), 10, 0, 0, 2);
+}
+
+/* Sidebar */
+.sidebar {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 15, 0, 2, 0);
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 0 1 0 0;
+}
+
+/* Sidebar Buttons */
+.sidebar-btn {
+    -fx-background-color: transparent;
+    -fx-padding: 15 24;
+    -fx-cursor: hand;
+    -fx-border-width: 0 0 0 4;
+    -fx-border-color: transparent;
+}
+
+.sidebar-btn:hover {
+    -fx-background-color: #F1F5F9;
+}
+
+.sidebar-btn-active {
+    -fx-background-color: #EFF6FF; /* Very light blue */
+    -fx-border-color: #2563EB; /* Primary blue left border */
+}
+
+.sidebar-btn-active .label {
+    -fx-text-fill: #1E3A8A; /* Darker blue text */
+    -fx-font-weight: bold;
+}
+
+/* ScrollPane Constraints */
+.main-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.main-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* ScrollBar Styling */
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 10;
+}
+
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-pref-height: 10;
+}
+
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: #CBD5E1;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar:vertical .thumb:hover,
+.scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: #94A3B8;
+}
+
+/* Cards */
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.04), 10, 0, 0, 4);
+    -fx-padding: 20; /* Reduced padding from 24 */
+    -fx-cursor: hand;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+}
+
+/* Forms */
+.form-container {
+    -fx-background-color: white;
+    -fx-padding: 32;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 10, 0, 0, 4);
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+}
+
+/* Typography Classes */
+.title-1 {
+    -fx-font-size: 24px; /* Reduced from 28px */
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F172A;
+}
+
+.title-2 {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F172A;
+}
+
+.subtitle {
+    -fx-font-size: 15px; /* Reduced from 16px */
+    -fx-text-fill: #64748B;
+}
+
+.card-title {
+    -fx-font-size: 17px; /* Reduced from 18px */
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E293B;
+}
+
+.card-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #64748B;
+}
+
+/* Primary Button */
+.primary-btn {
+    -fx-background-color: #2563EB;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 10 20; /* Reduced padding */
+    -fx-cursor: hand;
+}
+
+.primary-btn:hover {
+    -fx-background-color: #1D4ED8;
+}
+
+/* Secondary Button (Back) */
+.secondary-btn {
+    -fx-background-color: #F1F5F9;
+    -fx-text-fill: #475569;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+}
+
+.secondary-btn:hover {
+    -fx-background-color: #E2E8F0;
+    -fx-text-fill: #1E293B;
+}
+
+/* Inputs */
+.modern-input {
+    -fx-background-radius: 6;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 6;
+    -fx-padding: 8 12; /* Reduced from 10 14 */
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 14px;
+}
+
+.modern-input:focused {
+    -fx-border-color: #2563EB;
+}

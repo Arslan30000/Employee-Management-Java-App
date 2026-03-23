@@ -2,26 +2,49 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
+<?import java.net.URL?>
 
-<BorderPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coresync.controllers.AdminController">
+<BorderPane prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coresync.controllers.AdminController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+
+    <!-- Top Navbar -->
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="70.0" style="-fx-background-color: linear-gradient(to right, #034078, #1282a2);" BorderPane.alignment="CENTER">
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" prefHeight="76.0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets left="30.0" right="30.0" />
             </padding>
-            <Label text="CoreSync Admin Portal" textFill="WHITE">
-                <font><Font name="System Bold" size="22.0" /></font>
-            </Label>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="⚡" textFill="#2563EB"><font><Font size="24.0"/></font></Label>
+                <Label text="CoreSync" textFill="#0F172A">
+                    <font><Font name="System Bold" size="22.0" /></font>
+                </Label>
+                <Label text="Admin" textFill="#64748B">
+                    <font><Font size="22.0" /></font>
+                </Label>
+            </HBox>
+            
             <Region HBox.hgrow="ALWAYS" />
-            <TextField promptText="Search employees..." style="-fx-background-radius: 15; -fx-padding: 5 15; -fx-pref-width: 200; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 15; -fx-background-color: #034078; -fx-text-fill: white;">
-                 <HBox.margin>
-                    <Insets right="20.0" />
-                 </HBox.margin>
-            </TextField>
-            <HBox alignment="CENTER" spacing="10">
-                <Label style="-fx-background-color: #f77f00; -fx-text-fill: white; -fx-background-radius: 15; -fx-font-weight: bold; -fx-min-width: 30; -fx-min-height: 30; -fx-alignment: center;" text="AM" />
-                <MenuButton style="-fx-background-color: transparent; -fx-text-fill: white;" textFill="WHITE">
+            
+            <HBox alignment="CENTER" spacing="24">
+                <TextField promptText="Search employees, payroll..." styleClass="modern-input" prefWidth="280.0"/>
+                
+                <MenuButton style="-fx-background-color: transparent; -fx-cursor: hand;">
+                    <graphic>
+                        <HBox alignment="CENTER" spacing="12">
+                            <StackPane>
+                                <Circle radius="20.0" fill="#DBEAFE" />
+                                <Label text="AM" textFill="#1D4ED8" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                            </StackPane>
+                            <VBox alignment="CENTER_LEFT">
+                                <Label text="System Admin" style="-fx-font-weight: bold; -fx-text-fill: #1E293B;" />
+                                <Label text="hr@coresync.com" style="-fx-text-fill: #64748B; -fx-font-size: 12;" />
+                            </VBox>
+                        </HBox>
+                    </graphic>
                     <items>
                         <MenuItem onAction="#handleLogout" text="Logout" />
                     </items>
@@ -29,129 +52,152 @@
             </HBox>
         </HBox>
     </top>
-    <center>
-        <StackPane fx:id="mainContentArea" style="-fx-background-color: #F8F9FA;">
+
+    <!-- Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" prefWidth="260.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="24.0" bottom="24.0" />
+            </padding>
             
-            <!-- Dashboard VBox wrapper for spacing above the grid -->
-            <VBox fx:id="dashboardVBox" alignment="TOP_CENTER" spacing="20.0">
+            <Label text="MAIN MENU" style="-fx-text-fill: #94A3B8; -fx-font-size: 12; -fx-font-weight: bold; -fx-padding: 0 0 10 24;" />
+
+            <HBox fx:id="dashboardBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showDashboard">
+                <Label styleClass="sidebar-icon" text="🏠" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Dashboard" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
+            <HBox fx:id="addEmployeeBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showAddEmployeeForm">
+                <Label styleClass="sidebar-icon" text="➕" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Add Employee" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
+            <HBox fx:id="manageEmployeesBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showFeatureNotImplemented">
+                <Label styleClass="sidebar-icon" text="👥" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Manage Employees" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
+            
+            <Label text="OPERATIONS" style="-fx-text-fill: #94A3B8; -fx-font-size: 12; -fx-font-weight: bold; -fx-padding: 24 0 10 24;" />
+            
+            <HBox fx:id="leaveManagementBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showFeatureNotImplemented">
+                <Label styleClass="sidebar-icon" text="📅" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Leave Management" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
+            <HBox fx:id="payrollManagementBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showFeatureNotImplemented">
+                <Label styleClass="sidebar-icon" text="💰" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Payroll Management" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
+            
+            <Region VBox.vgrow="ALWAYS" />
+            
+            <HBox styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" style="-fx-padding: 15 24; -fx-cursor: hand;" onMouseClicked="#handleLogoutAsMouseEvent">
+                <Label styleClass="sidebar-icon" text="🚪" style="-fx-text-fill: #EF4444;"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Logout" style="-fx-text-fill: #EF4444; -fx-font-weight: bold;"><font><Font size="15.0" /></font></Label>
+            </HBox>
+        </VBox>
+    </left>
+
+    <!-- Main Content Area with ScrollPane -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="main-scroll" style="-fx-border-color: transparent;">
+            <StackPane fx:id="mainContentArea" style="-fx-background-color: #F8FAFC;">
                 <padding>
-                    <Insets top="30.0" left="30.0" right="30.0" bottom="30.0"/>
+                    <Insets top="32.0" right="32.0" bottom="32.0" left="32.0" />
                 </padding>
                 
-                <Label text="Quick Actions" textFill="#555555" style="-fx-font-weight: bold;">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-
-                <!-- Dashboard Grid -->
-                <GridPane fx:id="dashboardGrid" alignment="CENTER" hgap="30.0" vgap="30.0">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" minWidth="250.0" />
-                        <ColumnConstraints halignment="CENTER" minWidth="250.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="160.0" valignment="CENTER" />
-                        <RowConstraints minHeight="160.0" valignment="CENTER" />
-                    </rowConstraints>
-
-                    <!-- Add Employee Card -->
-                    <VBox fx:id="addEmployeeCard" alignment="CENTER" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 15, 0, 0, 5); -fx-cursor: hand; -fx-border-color: #f77f00 transparent transparent transparent; -fx-border-width: 4 0 0 0;" GridPane.columnIndex="0" GridPane.rowIndex="0" onMouseClicked="#showAddEmployeeForm">
-                        <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
-                        <Label text="➕👤" textFill="#f77f00">
-                            <font><Font size="32.0" /></font>
-                        </Label>
-                        <Label text="Add Employee" textFill="#034078">
-                            <font><Font name="System Bold" size="16.0" /></font>
-                        </Label>
+                <!-- Default Dashboard View -->
+                <VBox fx:id="dashboardVBox" spacing="24.0" maxWidth="900.0" alignment="TOP_LEFT">
+                    <VBox spacing="6.0">
+                        <Label text="Welcome back, System Admin!" styleClass="title-1" />
+                        <Label text="Here’s what’s happening in your organization today." styleClass="subtitle" />
                     </VBox>
+                    
+                    <Label text="Quick Actions" styleClass="card-title" style="-fx-padding: 8 0 0 0;" />
+                    
+                    <!-- Cards Container -->
+                    <FlowPane hgap="24.0" vgap="24.0">
+                        <!-- Add Employee Card -->
+                        <HBox fx:id="quickActionAddEmployee" styleClass="card" spacing="20.0" prefWidth="300.0" alignment="CENTER_LEFT" onMouseClicked="#showAddEmployeeForm">
+                            <StackPane style="-fx-background-color: #DBEAFE; -fx-background-radius: 12; -fx-padding: 16;">
+                                <Label text="➕" textFill="#2563EB"><font><Font size="24.0" /></font></Label>
+                            </StackPane>
+                            <VBox alignment="CENTER_LEFT" spacing="4.0">
+                                <Label text="Add Employee" styleClass="card-title" />
+                                <Label text="Register a staff member" styleClass="card-subtitle" />
+                            </VBox>
+                        </HBox>
+                        
+                        <!-- Leave Approvals Card -->
+                        <HBox fx:id="quickActionLeave" styleClass="card" spacing="20.0" prefWidth="300.0" alignment="CENTER_LEFT" onMouseClicked="#showFeatureNotImplemented">
+                            <StackPane style="-fx-background-color: #FEF3C7; -fx-background-radius: 12; -fx-padding: 16;">
+                                <Label text="📅" textFill="#D97706"><font><Font size="24.0" /></font></Label>
+                            </StackPane>
+                            <VBox alignment="CENTER_LEFT" spacing="4.0">
+                                <Label text="Leave Approvals" styleClass="card-title" />
+                                <Label text="7 requests pending" styleClass="card-subtitle" />
+                            </VBox>
+                        </HBox>
+                        
+                        <!-- Run Payroll Card -->
+                        <HBox fx:id="quickActionPayroll" styleClass="card" spacing="20.0" prefWidth="300.0" alignment="CENTER_LEFT" onMouseClicked="#showFeatureNotImplemented">
+                            <StackPane style="-fx-background-color: #DCFCE7; -fx-background-radius: 12; -fx-padding: 16;">
+                                <Label text="💰" textFill="#16A34A"><font><Font size="24.0" /></font></Label>
+                            </StackPane>
+                            <VBox alignment="CENTER_LEFT" spacing="4.0">
+                                <Label text="Run Payroll" styleClass="card-title" />
+                                <Label text="Process monthly salaries" styleClass="card-subtitle" />
+                            </VBox>
+                        </HBox>
+                    </FlowPane>
+                </VBox>
+                
+                <!-- Add Employee Form -->
+                <VBox fx:id="addEmployeeForm" spacing="20.0" maxWidth="750.0" styleClass="form-container" visible="false">
+                    
+                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                        <Button onAction="#showDashboard" text="← Back" styleClass="secondary-btn" />
+                        <Label text="Register New Employee" styleClass="title-2" />
+                    </HBox>
 
-                    <!-- Manage Employees Card -->
-                    <VBox fx:id="manageEmployeesCard" alignment="CENTER" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 15, 0, 0, 5); -fx-cursor: hand; -fx-border-color: #f77f00 transparent transparent transparent; -fx-border-width: 4 0 0 0;" GridPane.columnIndex="1" GridPane.rowIndex="0" onMouseClicked="#showFeatureNotImplemented">
-                        <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
-                        <Label text="👥" textFill="#f77f00">
-                            <font><Font size="32.0" /></font>
-                        </Label>
-                        <Label text="Manage Employees" textFill="#034078">
-                            <font><Font name="System Bold" size="16.0" /></font>
-                        </Label>
-                    </VBox>
+                    <GridPane hgap="24.0" vgap="16.0" alignment="CENTER_LEFT">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50.0" />
+                            <ColumnConstraints percentWidth="50.0" />
+                        </columnConstraints>
 
-                    <!-- Leave Management Card -->
-                    <VBox fx:id="leaveManagementCard" alignment="CENTER" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 15, 0, 0, 5); -fx-cursor: hand; -fx-border-color: #f77f00 transparent transparent transparent; -fx-border-width: 4 0 0 0;" GridPane.columnIndex="0" GridPane.rowIndex="1" onMouseClicked="#showFeatureNotImplemented">
-                        <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
-                        <Label text="📅" textFill="#f77f00">
-                            <font><Font size="32.0" /></font>
-                        </Label>
-                        <Label text="Leave Management" textFill="#034078">
-                            <font><Font name="System Bold" size="16.0" /></font>
-                        </Label>
-                    </VBox>
+                        <VBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" spacing="4.0">
+                            <Label text="Employee ID" style="-fx-font-weight: bold; -fx-text-fill: #334155; -fx-font-size: 13;" />
+                            <TextField fx:id="empIdField" styleClass="modern-input" />
+                        </VBox>
 
-                    <!-- Payroll Management Card -->
-                    <VBox fx:id="payrollManagementCard" alignment="CENTER" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 15, 0, 0, 5); -fx-cursor: hand; -fx-border-color: #f77f00 transparent transparent transparent; -fx-border-width: 4 0 0 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" onMouseClicked="#showFeatureNotImplemented">
-                        <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
-                        <Label text="💰" textFill="#f77f00">
-                            <font><Font size="32.0" /></font>
-                        </Label>
-                        <Label text="Payroll Management" textFill="#034078">
-                            <font><Font name="System Bold" size="16.0" /></font>
-                        </Label>
-                    </VBox>
-                </GridPane>
-            </VBox>
+                        <VBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" spacing="4.0">
+                            <Label text="Full Name" style="-fx-font-weight: bold; -fx-text-fill: #334155; -fx-font-size: 13;" />
+                            <TextField fx:id="nameField" styleClass="modern-input" />
+                        </VBox>
 
-            <!-- Register New Employee Form (Initially Hidden) -->
-            <VBox fx:id="addEmployeeForm" alignment="CENTER" maxWidth="500.0" maxHeight="450.0" spacing="20.0" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 15, 0, 0, 5);" visible="false">
-                <HBox alignment="CENTER_LEFT">
-                    <Button onAction="#showDashboard" text="&lt; Back" style="-fx-background-color: transparent; -fx-text-fill: #1282a2; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 5 0;"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Label text="Register New Employee" textFill="#034078">
-                        <font><Font name="System Bold" size="20.0" /></font>
-                    </Label>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <!-- Dummy space to balance the back button -->
-                    <Region prefWidth="50" />
-                </HBox>
+                        <VBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" spacing="4.0">
+                            <Label text="Role Assignment" style="-fx-font-weight: bold; -fx-text-fill: #334155; -fx-font-size: 13;" />
+                            <ComboBox fx:id="roleComboBox" styleClass="modern-input" maxWidth="2000.0" />
+                        </VBox>
 
-                <GridPane hgap="15.0" vgap="15.0" alignment="CENTER">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" minWidth="120.0" />
-                        <ColumnConstraints hgrow="ALWAYS" minWidth="250.0" />
-                    </columnConstraints>
+                        <!-- COMPACT GRID: Salary and Password Side by Side -->
+                        <VBox GridPane.columnIndex="0" GridPane.rowIndex="3" spacing="4.0">
+                            <Label text="Base Salary (PKR)" style="-fx-font-weight: bold; -fx-text-fill: #334155; -fx-font-size: 13;" />
+                            <TextField fx:id="salaryField" styleClass="modern-input" />
+                        </VBox>
 
-                    <Label text="Employee ID:" textFill="#034078" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                        <font><Font name="System Bold" size="14.0" /></font>
-                    </Label>
-                    <TextField fx:id="empIdField" style="-fx-background-radius: 5; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <VBox GridPane.columnIndex="1" GridPane.rowIndex="3" spacing="4.0">
+                            <Label text="Default Password" style="-fx-font-weight: bold; -fx-text-fill: #334155; -fx-font-size: 13;" />
+                            <PasswordField fx:id="passField" styleClass="modern-input" />
+                        </VBox>
+                    </GridPane>
 
-                    <Label text="Full Name:" textFill="#034078" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                         <font><Font name="System Bold" size="14.0" /></font>
-                    </Label>
-                    <TextField fx:id="nameField" style="-fx-background-radius: 5; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Button onAction="#handleRegisterEmployee" styleClass="primary-btn" text="Complete Registration" maxWidth="2000.0">
+                        <VBox.margin><Insets top="8.0" /></VBox.margin>
+                    </Button>
 
-                    <Label text="Role:" textFill="#034078" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                         <font><Font name="System Bold" size="14.0" /></font>
-                    </Label>
-                    <ComboBox fx:id="roleComboBox" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-padding: 3;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label fx:id="statusLabel" alignment="CENTER" maxWidth="2000.0" />
+                </VBox>
 
-                    <Label text="Base Salary (PKR):" textFill="#034078" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                         <font><Font name="System Bold" size="14.0" /></font>
-                    </Label>
-                    <TextField fx:id="salaryField" style="-fx-background-radius: 5; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-                    <Label text="Default Password:" textFill="#034078" GridPane.columnIndex="0" GridPane.rowIndex="4">
-                         <font><Font name="System Bold" size="14.0" /></font>
-                    </Label>
-                    <PasswordField fx:id="passField" style="-fx-background-radius: 5; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                </GridPane>
-
-                <Button onAction="#handleRegisterEmployee" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to right, #0099cc, #034078); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;" text="Register Employee">
-                    <VBox.margin><Insets top="10.0" /></VBox.margin>
-                </Button>
-
-                <Label fx:id="statusLabel" />
-            </VBox>
-        </StackPane>
+            </StackPane>
+        </ScrollPane>
     </center>
 </BorderPane>
