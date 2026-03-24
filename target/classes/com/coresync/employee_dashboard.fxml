@@ -1,51 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
+<?import java.net.URL?>
 
-<BorderPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coresync.controllers.EmployeeController">
+<BorderPane prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coresync.controllers.EmployeeController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="70.0" style="-fx-background-color: linear-gradient(to right, #034078, #1282a2);" BorderPane.alignment="CENTER">
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" prefHeight="76.0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets left="30.0" right="30.0" />
             </padding>
-            <Label text="CoreSync Employee Portal" textFill="WHITE">
-                <font><Font name="System Bold" size="22.0" /></font>
-            </Label>
-            <HBox HBox.hgrow="ALWAYS" />
-            <Button onAction="#handleLogout" style="-fx-background-color: #f77f00; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;" text="Logout" />
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="⚡" textFill="#2563EB"><font><Font size="24.0"/></font></Label>
+                <Label text="CoreSync" textFill="#0F172A">
+                    <font><Font name="System Bold" size="22.0" /></font>
+                </Label>
+                <Label text="Employee" textFill="#64748B">
+                    <font><Font size="22.0" /></font>
+                </Label>
+            </HBox>
+            
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <HBox alignment="CENTER" spacing="24">
+                <TextField promptText="Search tasks, leave..." styleClass="modern-input" prefWidth="280.0"/>
+                
+                <MenuButton style="-fx-background-color: transparent; -fx-cursor: hand;">
+                    <graphic>
+                        <HBox alignment="CENTER" spacing="12">
+                            <StackPane>
+                                <Circle radius="20.0" fill="#E0E7FF" />
+                                <Label text="EMP" textFill="#4338CA" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                            </StackPane>
+                            <VBox alignment="CENTER_LEFT">
+                                <Label fx:id="userNameLabel" text="Employee" style="-fx-font-weight: bold; -fx-text-fill: #1E293B;" />
+                                <Label text="Standard User" style="-fx-text-fill: #64748B; -fx-font-size: 12;" />
+                            </VBox>
+                        </HBox>
+                    </graphic>
+                    <items>
+                        <MenuItem onAction="#handleLogout" text="Logout" />
+                    </items>
+                </MenuButton>
+            </HBox>
         </HBox>
     </top>
-    <center>
-        <VBox alignment="CENTER" spacing="40.0" style="-fx-background-color: #f4f7f6;">
-            <HBox alignment="CENTER" spacing="50.0">
-                
-                <VBox prefWidth="320.0" spacing="20.0" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 5);">
-                    <Label text="My Profile" textFill="#034078"><font><Font name="System Bold" size="20.0" /></font></Label>
-                    <Label fx:id="nameLabel" text="Name: Loading..." textFill="#333333"><font><Font size="16.0" /></font></Label>
-                    <Label fx:id="idLabel" text="ID: Loading..." textFill="#333333"><font><Font size="16.0" /></font></Label>
-                    <Label fx:id="roleLabel" text="Role: Loading..." textFill="#333333"><font><Font size="16.0" /></font></Label>
-                    <Label fx:id="salaryLabel" text="Base Salary: Loading..." textFill="#1282a2"><font><Font name="System Bold" size="16.0" /></font></Label>
-                </VBox>
-                
-                <VBox prefWidth="320.0" spacing="20.0" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 5);">
-                    <Label text="Leave Balance" textFill="#f77f00"><font><Font name="System Bold" size="20.0" /></font></Label>
-                    
-                    <VBox spacing="5.0">
-                        <Label fx:id="remainingLeavesLabel" text="Remaining: 0 days" textFill="#d62828"><font><Font name="System Bold" size="18.0" /></font></Label>
-                        <ProgressBar fx:id="leaveProgressBar" prefHeight="20.0" prefWidth="260.0" progress="0.0" style="-fx-accent: #f77f00;" />
-                    </VBox>
-                    
-                    <Label fx:id="totalLeavesLabel" text="Total Allowed: 0" textFill="#666666" />
-                    <Label fx:id="leavesTakenLabel" text="Leaves Taken: 0" textFill="#666666" />
-                </VBox>
 
+    <left>
+        <VBox styleClass="sidebar" prefWidth="260.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="24.0" bottom="24.0" />
+            </padding>
+            
+            <Label text="MAIN MENU" style="-fx-text-fill: #94A3B8; -fx-font-size: 12; -fx-font-weight: bold; -fx-padding: 0 0 10 24;" />
+
+            <HBox fx:id="dashboardBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showDashboard">
+                <Label styleClass="sidebar-icon" text="🏠" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="My Dashboard" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
+            
+            <HBox fx:id="attendanceBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showAttendance">
+                <Label styleClass="sidebar-icon" text="⏱️" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="My Attendance" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
+            
+            <Label text="FINANCE AND LEAVE" style="-fx-text-fill: #94A3B8; -fx-font-size: 12; -fx-font-weight: bold; -fx-padding: 24 0 10 24;" />
+            
+            <HBox fx:id="leaveBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showFeatureNotImplemented">
+                <Label styleClass="sidebar-icon" text="🏖️" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Leave Balance" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
+            <HBox fx:id="salaryBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showFeatureNotImplemented">
+                <Label styleClass="sidebar-icon" text="💵" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="View Salary" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
+            
+            <Region VBox.vgrow="ALWAYS" />
+            
+            <HBox styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" style="-fx-padding: 15 24; -fx-cursor: hand;" onMouseClicked="#handleLogoutAsMouseEvent">
+                <Label styleClass="sidebar-icon" text="🚪" style="-fx-text-fill: #EF4444;"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Logout" style="-fx-text-fill: #EF4444; -fx-font-weight: bold;"><font><Font size="15.0" /></font></Label>
             </HBox>
         </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="main-scroll" style="-fx-border-color: transparent;">
+            <StackPane fx:id="mainContentArea" style="-fx-background-color: #F8FAFC;">
+                <padding>
+                    <Insets top="32.0" right="32.0" bottom="32.0" left="32.0" />
+                </padding>
+                
+                <VBox fx:id="dashboardVBox" spacing="24.0" maxWidth="900.0" alignment="TOP_LEFT">
+                    <VBox spacing="6.0">
+                        <Label fx:id="welcomeLabel" text="Welcome back, Employee!" styleClass="title-1" />
+                        <Label text="Here is your current status and leave balance." styleClass="subtitle" />
+                    </VBox>
+                    
+                    <Label text="My Leave Balance (US-03)" styleClass="card-title" style="-fx-padding: 8 0 0 0;" />
+                    
+                    <FlowPane hgap="24.0" vgap="24.0">
+                        <HBox fx:id="cardTotal" styleClass="card" spacing="20.0" prefWidth="280.0" alignment="CENTER_LEFT">
+                            <StackPane style="-fx-background-color: #DBEAFE; -fx-background-radius: 12; -fx-padding: 16;">
+                                <Label text="📋" textFill="#2563EB"><font><Font size="24.0" /></font></Label>
+                            </StackPane>
+                            <VBox alignment="CENTER_LEFT" spacing="4.0">
+                                <Label text="Total Allowed" styleClass="card-title" />
+                                <Label fx:id="totalLeavesLabel" text="-" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #1E293B;" />
+                            </VBox>
+                        </HBox>
+                        
+                        <HBox fx:id="cardTaken" styleClass="card" spacing="20.0" prefWidth="280.0" alignment="CENTER_LEFT">
+                            <StackPane style="-fx-background-color: #FEE2E2; -fx-background-radius: 12; -fx-padding: 16;">
+                                <Label text="✈️" textFill="#DC2626"><font><Font size="24.0" /></font></Label>
+                            </StackPane>
+                            <VBox alignment="CENTER_LEFT" spacing="4.0">
+                                <Label text="Leaves Taken" styleClass="card-title" />
+                                <Label fx:id="takenLeavesLabel" text="-" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #1E293B;" />
+                            </VBox>
+                        </HBox>
+                        
+                        <HBox fx:id="cardRemaining" styleClass="card" spacing="20.0" prefWidth="280.0" alignment="CENTER_LEFT">
+                            <StackPane style="-fx-background-color: #DCFCE7; -fx-background-radius: 12; -fx-padding: 16;">
+                                <Label text="✅" textFill="#16A34A"><font><Font size="24.0" /></font></Label>
+                            </StackPane>
+                            <VBox alignment="CENTER_LEFT" spacing="4.0">
+                                <Label text="Remaining Balance" styleClass="card-title" />
+                                <Label fx:id="remainingLeavesLabel" text="-" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #1E293B;" />
+                            </VBox>
+                        </HBox>
+                    </FlowPane>
+                    
+                    <Region VBox.vgrow="ALWAYS" />
+                </VBox>
+
+                <VBox fx:id="attendanceVBox" spacing="24.0" maxWidth="900.0" alignment="TOP_LEFT" visible="false">
+                    
+                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                        <Button onAction="#showDashboard" text="Back" styleClass="secondary-btn" />
+                        <VBox>
+                            <Label text="Daily Attendance" styleClass="title-2" />
+                            <Label text="Log your daily work hours for payroll processing." styleClass="subtitle" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="24.0">
+                        <VBox styleClass="card" spacing="24.0" prefWidth="350.0" alignment="CENTER" style="-fx-padding: 30;">
+                            <Label text="Current Status" styleClass="card-title" />
+                            <Label fx:id="attendanceStatusLabel" text="🔴 Off Duty" style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #64748B;" />
+                            <Button fx:id="clockInOutBtn" text="Clock In" onAction="#handleClockToggle" prefWidth="200.0" style="-fx-background-color: #2563EB; -fx-text-fill: white; -fx-font-size: 16; -fx-padding: 10; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" />
+                        </VBox>
+
+                        <VBox styleClass="card" spacing="20.0" prefWidth="350.0" alignment="CENTER_LEFT" style="-fx-padding: 30;">
+                            <Label text="Today's Record" styleClass="card-title" />
+                            
+                            <HBox alignment="CENTER_LEFT">
+                                <Label text="Time In:" style="-fx-font-weight: bold; -fx-text-fill: #475569; -fx-font-size: 15;"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Label fx:id="timeInLabel" text="--:-- --" style="-fx-font-weight: bold; -fx-text-fill: #1E293B; -fx-font-size: 15;"/>
+                            </HBox>
+                            
+                            <Separator />
+                            
+                            <HBox alignment="CENTER_LEFT">
+                                <Label text="Time Out:" style="-fx-font-weight: bold; -fx-text-fill: #475569; -fx-font-size: 15;"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Label fx:id="timeOutLabel" text="--:-- --" style="-fx-font-weight: bold; -fx-text-fill: #1E293B; -fx-font-size: 15;"/>
+                            </HBox>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </StackPane>
+        </ScrollPane>
     </center>
 </BorderPane>
