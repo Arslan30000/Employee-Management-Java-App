@@ -11,27 +11,16 @@
         <URL value="@styles.css" />
     </stylesheets>
 
-    <!-- Top Navbar -->
     <top>
         <HBox styleClass="navbar" alignment="CENTER_LEFT" prefHeight="76.0" BorderPane.alignment="CENTER">
-            <padding>
-                <Insets left="30.0" right="30.0" />
-            </padding>
+            <padding><Insets left="30.0" right="30.0" /></padding>
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <Label text="⚡" textFill="#2563EB"><font><Font size="24.0"/></font></Label>
-                <Label text="CoreSync" textFill="#0F172A">
-                    <font><Font name="System Bold" size="22.0" /></font>
-                </Label>
-                <Label text="Admin" textFill="#64748B">
-                    <font><Font size="22.0" /></font>
-                </Label>
+                <Label text="CoreSync" textFill="#0F172A"><font><Font name="System Bold" size="22.0" /></font></Label>
+                <Label text="Admin" textFill="#64748B"><font><Font size="22.0" /></font></Label>
             </HBox>
-            
             <Region HBox.hgrow="ALWAYS" />
-            
             <HBox alignment="CENTER" spacing="24">
-                <TextField promptText="Search employees, payroll..." styleClass="modern-input" prefWidth="280.0"/>
-                
                 <MenuButton style="-fx-background-color: transparent; -fx-cursor: hand;">
                     <graphic>
                         <HBox alignment="CENTER" spacing="12">
@@ -45,23 +34,17 @@
                             </VBox>
                         </HBox>
                     </graphic>
-                    <items>
-                        <MenuItem onAction="#handleLogout" text="Logout" />
-                    </items>
+                    <items><MenuItem onAction="#handleLogout" text="Logout" /></items>
                 </MenuButton>
             </HBox>
         </HBox>
     </top>
 
-    <!-- Sidebar -->
     <left>
         <VBox styleClass="sidebar" prefWidth="260.0" BorderPane.alignment="CENTER">
-            <padding>
-                <Insets top="24.0" bottom="24.0" />
-            </padding>
+            <padding><Insets top="24.0" bottom="24.0" /></padding>
             
             <Label text="MAIN MENU" style="-fx-text-fill: #94A3B8; -fx-font-size: 12; -fx-font-weight: bold; -fx-padding: 0 0 10 24;" />
-
             <HBox fx:id="dashboardBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showDashboard">
                 <Label styleClass="sidebar-icon" text="🏠" textFill="#64748B"><font><Font size="20.0" /></font></Label>
                 <Label styleClass="sidebar-text" text="Dashboard" textFill="#475569"><font><Font size="15.0" /></font></Label>
@@ -70,24 +53,22 @@
                 <Label styleClass="sidebar-icon" text="➕" textFill="#64748B"><font><Font size="20.0" /></font></Label>
                 <Label styleClass="sidebar-text" text="Add Employee" textFill="#475569"><font><Font size="15.0" /></font></Label>
             </HBox>
-            <HBox fx:id="manageEmployeesBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showFeatureNotImplemented">
+            <HBox fx:id="manageEmployeesBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showManageEmployees">
                 <Label styleClass="sidebar-icon" text="👥" textFill="#64748B"><font><Font size="20.0" /></font></Label>
-                <Label styleClass="sidebar-text" text="Manage Employees" textFill="#475569"><font><Font size="15.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Employee Directory" textFill="#475569"><font><Font size="15.0" /></font></Label>
             </HBox>
             
             <Label text="OPERATIONS" style="-fx-text-fill: #94A3B8; -fx-font-size: 12; -fx-font-weight: bold; -fx-padding: 24 0 10 24;" />
-            
-            <HBox fx:id="leaveManagementBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showFeatureNotImplemented">
+            <HBox fx:id="leaveManagementBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showLeaveManagement">
                 <Label styleClass="sidebar-icon" text="📅" textFill="#64748B"><font><Font size="20.0" /></font></Label>
-                <Label styleClass="sidebar-text" text="Leave Management" textFill="#475569"><font><Font size="15.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Leave Approvals" textFill="#475569"><font><Font size="15.0" /></font></Label>
             </HBox>
-            <HBox fx:id="payrollManagementBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showFeatureNotImplemented">
-                <Label styleClass="sidebar-icon" text="💰" textFill="#64748B"><font><Font size="20.0" /></font></Label>
-                <Label styleClass="sidebar-text" text="Payroll Management" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            <HBox fx:id="settingsBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showSettings">
+                <Label styleClass="sidebar-icon" text="⚙️" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Change Password" textFill="#475569"><font><Font size="15.0" /></font></Label>
             </HBox>
             
             <Region VBox.vgrow="ALWAYS" />
-            
             <HBox styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" style="-fx-padding: 15 24; -fx-cursor: hand;" onMouseClicked="#handleLogoutAsMouseEvent">
                 <Label styleClass="sidebar-icon" text="🚪" style="-fx-text-fill: #EF4444;"><font><Font size="20.0" /></font></Label>
                 <Label styleClass="sidebar-text" text="Logout" style="-fx-text-fill: #EF4444; -fx-font-weight: bold;"><font><Font size="15.0" /></font></Label>
@@ -95,106 +76,108 @@
         </VBox>
     </left>
 
-    <!-- Main Content Area with ScrollPane -->
     <center>
-        <ScrollPane fitToWidth="true" styleClass="main-scroll" style="-fx-border-color: transparent;">
+        <ScrollPane fitToWidth="true" styleClass="main-scroll">
             <StackPane fx:id="mainContentArea" style="-fx-background-color: #F8FAFC;">
-                <padding>
-                    <Insets top="32.0" right="32.0" bottom="32.0" left="32.0" />
-                </padding>
+                <padding><Insets top="32.0" right="32.0" bottom="32.0" left="32.0" /></padding>
                 
-                <!-- Default Dashboard View -->
                 <VBox fx:id="dashboardVBox" spacing="24.0" maxWidth="900.0" alignment="TOP_LEFT">
                     <VBox spacing="6.0">
                         <Label text="Welcome back, System Admin!" styleClass="title-1" />
                         <Label text="Here’s what’s happening in your organization today." styleClass="subtitle" />
                     </VBox>
-                    
                     <Label text="Quick Actions" styleClass="card-title" style="-fx-padding: 8 0 0 0;" />
-                    
-                    <!-- Cards Container -->
                     <FlowPane hgap="24.0" vgap="24.0">
-                        <!-- Add Employee Card -->
                         <HBox fx:id="quickActionAddEmployee" styleClass="card" spacing="20.0" prefWidth="300.0" alignment="CENTER_LEFT" onMouseClicked="#showAddEmployeeForm">
-                            <StackPane style="-fx-background-color: #DBEAFE; -fx-background-radius: 12; -fx-padding: 16;">
-                                <Label text="➕" textFill="#2563EB"><font><Font size="24.0" /></font></Label>
-                            </StackPane>
-                            <VBox alignment="CENTER_LEFT" spacing="4.0">
-                                <Label text="Add Employee" styleClass="card-title" />
-                                <Label text="Register a staff member" styleClass="card-subtitle" />
-                            </VBox>
+                            <StackPane style="-fx-background-color: #DBEAFE; -fx-background-radius: 12; -fx-padding: 16;"><Label text="➕" textFill="#2563EB"><font><Font size="24.0" /></font></Label></StackPane>
+                            <VBox alignment="CENTER_LEFT" spacing="4.0"><Label text="Add Employee" styleClass="card-title" /><Label text="Register a staff member" styleClass="card-subtitle" /></VBox>
                         </HBox>
-                        
-                        <!-- Leave Approvals Card -->
-                        <HBox fx:id="quickActionLeave" styleClass="card" spacing="20.0" prefWidth="300.0" alignment="CENTER_LEFT" onMouseClicked="#showFeatureNotImplemented">
-                            <StackPane style="-fx-background-color: #FEF3C7; -fx-background-radius: 12; -fx-padding: 16;">
-                                <Label text="📅" textFill="#D97706"><font><Font size="24.0" /></font></Label>
-                            </StackPane>
-                            <VBox alignment="CENTER_LEFT" spacing="4.0">
-                                <Label text="Leave Approvals" styleClass="card-title" />
-                                <Label text="7 requests pending" styleClass="card-subtitle" />
-                            </VBox>
-                        </HBox>
-                        
-                        <!-- Run Payroll Card -->
-                        <HBox fx:id="quickActionPayroll" styleClass="card" spacing="20.0" prefWidth="300.0" alignment="CENTER_LEFT" onMouseClicked="#showFeatureNotImplemented">
-                            <StackPane style="-fx-background-color: #DCFCE7; -fx-background-radius: 12; -fx-padding: 16;">
-                                <Label text="💰" textFill="#16A34A"><font><Font size="24.0" /></font></Label>
-                            </StackPane>
-                            <VBox alignment="CENTER_LEFT" spacing="4.0">
-                                <Label text="Run Payroll" styleClass="card-title" />
-                                <Label text="Process monthly salaries" styleClass="card-subtitle" />
-                            </VBox>
+                        <HBox fx:id="quickActionLeave" styleClass="card" spacing="20.0" prefWidth="300.0" alignment="CENTER_LEFT" onMouseClicked="#showLeaveManagement">
+                            <StackPane style="-fx-background-color: #FEF3C7; -fx-background-radius: 12; -fx-padding: 16;"><Label text="📅" textFill="#D97706"><font><Font size="24.0" /></font></Label></StackPane>
+                            <VBox alignment="CENTER_LEFT" spacing="4.0"><Label text="Leave Approvals" styleClass="card-title" /><Label text="Review pending requests" styleClass="card-subtitle" /></VBox>
                         </HBox>
                     </FlowPane>
                 </VBox>
                 
-                <!-- Add Employee Form -->
                 <VBox fx:id="addEmployeeForm" spacing="20.0" maxWidth="750.0" styleClass="form-container" visible="false">
-                    
                     <HBox alignment="CENTER_LEFT" spacing="12.0">
-                        <Button onAction="#showDashboard" text="← Back" styleClass="secondary-btn" />
                         <Label text="Register New Employee" styleClass="title-2" />
                     </HBox>
-
-                    <GridPane hgap="24.0" vgap="16.0" alignment="CENTER_LEFT">
-                        <columnConstraints>
-                            <ColumnConstraints percentWidth="50.0" />
-                            <ColumnConstraints percentWidth="50.0" />
-                        </columnConstraints>
-
+                    <GridPane hgap="24.0" vgap="16.0">
+                        <columnConstraints><ColumnConstraints percentWidth="50.0" /><ColumnConstraints percentWidth="50.0" /></columnConstraints>
                         <VBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" spacing="4.0">
                             <Label text="Employee ID" style="-fx-font-weight: bold; -fx-text-fill: #334155; -fx-font-size: 13;" />
                             <TextField fx:id="empIdField" styleClass="modern-input" />
                         </VBox>
-
                         <VBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" spacing="4.0">
                             <Label text="Full Name" style="-fx-font-weight: bold; -fx-text-fill: #334155; -fx-font-size: 13;" />
                             <TextField fx:id="nameField" styleClass="modern-input" />
                         </VBox>
-
                         <VBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" spacing="4.0">
                             <Label text="Role Assignment" style="-fx-font-weight: bold; -fx-text-fill: #334155; -fx-font-size: 13;" />
                             <ComboBox fx:id="roleComboBox" styleClass="modern-input" maxWidth="2000.0" />
                         </VBox>
-
-                        <!-- COMPACT GRID: Salary and Password Side by Side -->
                         <VBox GridPane.columnIndex="0" GridPane.rowIndex="3" spacing="4.0">
                             <Label text="Base Salary (PKR)" style="-fx-font-weight: bold; -fx-text-fill: #334155; -fx-font-size: 13;" />
                             <TextField fx:id="salaryField" styleClass="modern-input" />
                         </VBox>
-
                         <VBox GridPane.columnIndex="1" GridPane.rowIndex="3" spacing="4.0">
                             <Label text="Default Password" style="-fx-font-weight: bold; -fx-text-fill: #334155; -fx-font-size: 13;" />
                             <PasswordField fx:id="passField" styleClass="modern-input" />
                         </VBox>
                     </GridPane>
-
-                    <Button onAction="#handleRegisterEmployee" styleClass="primary-btn" text="Complete Registration" maxWidth="2000.0">
-                        <VBox.margin><Insets top="8.0" /></VBox.margin>
-                    </Button>
-
+                    <Button onAction="#handleRegisterEmployee" styleClass="primary-btn" text="Complete Registration" maxWidth="2000.0" />
                     <Label fx:id="statusLabel" alignment="CENTER" maxWidth="2000.0" />
+                </VBox>
+
+                <VBox fx:id="manageEmployeesVBox" spacing="20.0" maxWidth="900.0" alignment="TOP_LEFT" visible="false">
+                    <Label text="Employee Directory" styleClass="title-2" />
+                    <VBox styleClass="card" VBox.vgrow="ALWAYS" style="-fx-padding: 20;">
+                        <TableView fx:id="empTable" prefHeight="400.0">
+                            <columns>
+                                <TableColumn fx:id="empIdCol" text="ID" prefWidth="120.0" />
+                                <TableColumn fx:id="empNameCol" text="Full Name" prefWidth="250.0" />
+                                <TableColumn fx:id="empRoleCol" text="Role" prefWidth="150.0" />
+                                <TableColumn fx:id="empSalaryCol" text="Base Salary (PKR)" prefWidth="150.0" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </VBox>
+
+                <VBox fx:id="leaveManagementVBox" spacing="20.0" maxWidth="900.0" alignment="TOP_LEFT" visible="false">
+                    <Label text="Pending Leave Requests" styleClass="title-2" />
+                    <VBox styleClass="card" VBox.vgrow="ALWAYS" style="-fx-padding: 20;" spacing="15.0">
+                        <TableView fx:id="leaveTable" prefHeight="350.0">
+                            <columns>
+                                <TableColumn fx:id="leaveIdCol" text="Req ID" prefWidth="70.0" />
+                                <TableColumn fx:id="leaveEmpIdCol" text="Emp ID" prefWidth="100.0" />
+                                <TableColumn fx:id="leaveStartCol" text="Start Date" prefWidth="120.0" />
+                                <TableColumn fx:id="leaveEndCol" text="End Date" prefWidth="120.0" />
+                                <TableColumn fx:id="leaveReasonCol" text="Reason" prefWidth="250.0" />
+                            </columns>
+                        </TableView>
+                        <HBox spacing="15.0" alignment="CENTER_LEFT">
+                            <Button text="✅ Approve Selected" onAction="#handleApproveLeave" styleClass="primary-btn" style="-fx-background-color: #16A34A;" />
+                            <Button text="❌ Reject Selected" onAction="#handleRejectLeave" styleClass="primary-btn" style="-fx-background-color: #DC2626;" />
+                            <Label fx:id="leaveAdminStatusLabel" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <VBox fx:id="settingsVBox" spacing="20.0" maxWidth="600.0" alignment="TOP_LEFT" visible="false">
+                    <Label text="Security Settings" styleClass="title-2" />
+                    <VBox styleClass="card" spacing="20.0" style="-fx-padding: 30;">
+                        <VBox spacing="8.0">
+                            <Label text="Current Password" style="-fx-font-weight: bold; -fx-text-fill: #334155;" />
+                            <PasswordField fx:id="oldPassField" styleClass="modern-input" />
+                        </VBox>
+                        <VBox spacing="8.0">
+                            <Label text="New Password" style="-fx-font-weight: bold; -fx-text-fill: #334155;" />
+                            <PasswordField fx:id="newPassField" styleClass="modern-input" />
+                        </VBox>
+                        <Button text="Update Password" onAction="#handleChangePassword" styleClass="primary-btn" prefWidth="200.0" />
+                        <Label fx:id="passStatusLabel" />
+                    </VBox>
                 </VBox>
 
             </StackPane>
