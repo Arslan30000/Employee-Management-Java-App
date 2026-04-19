@@ -11,10 +11,10 @@ public class AuthService {
         
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost/payroll_api/login.php"))
+                .uri(URI.create(ApiConfig.endpoint("login.php")))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonInput))
-                .build();
+                .build(); 
 
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -24,7 +24,7 @@ public class AuthService {
         } catch (Exception e) {
             System.err.println("Authentication Error: " + e.getMessage());
             e.printStackTrace();
-            throw new Exception("Failed to connect to authentication server. Make sure XAMPP/PHP backend is running at http://localhost/payroll_api/login.php", e);
+            throw new Exception("Failed to connect to authentication server. Make sure XAMPP/PHP backend is running at " + ApiConfig.endpoint("login.php"), e);
         }
     }
 }

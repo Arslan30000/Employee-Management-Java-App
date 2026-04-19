@@ -1,10 +1,13 @@
 com\coresync\controllers\EmployeeController$LeaveHistory.class
 com\coresync\controllers\EmployeeController.class
 com\coresync\controllers\EmployeeController$Holiday.class
+com\coresync\services\ApiConfig.class
 com\coresync\App.class
 com\coresync\controllers\AdminController$EmployeeData.class
 com\coresync\services\AuthService.class
 com\coresync\services\UserSession.class
+com\coresync\controllers\EmployeeController$PayslipData.class
+com\coresync\controllers\AdminController$PayrollData.class
 com\coresync\controllers\AdminController$LeaveData.class
 com\coresync\controllers\LoginController.class
 com\coresync\controllers\AdminController.class

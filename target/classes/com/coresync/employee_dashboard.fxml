@@ -60,6 +60,10 @@
                 <Label styleClass="sidebar-icon" text="🏖️" textFill="#64748B"><font><Font size="20.0" /></font></Label>
                 <Label styleClass="sidebar-text" text="Leave Request" textFill="#475569"><font><Font size="15.0" /></font></Label>
             </HBox>
+            <HBox fx:id="salaryBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showSalary">
+                <Label styleClass="sidebar-icon" text="💵" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="View Salary" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
             <HBox fx:id="holidaysBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showHolidays">
                 <Label styleClass="sidebar-icon" text="🎉" textFill="#64748B"><font><Font size="20.0" /></font></Label>
                 <Label styleClass="sidebar-text" text="Holidays" textFill="#475569"><font><Font size="15.0" /></font></Label>
@@ -125,7 +129,6 @@
 
                 <VBox fx:id="leaveRequestVBox" spacing="24.0" maxWidth="900.0" alignment="TOP_LEFT" visible="false">
                     <Label text="Leave Management" styleClass="title-2" />
-                    
                     <VBox styleClass="card" spacing="20.0" prefWidth="900.0" style="-fx-padding: 20;">
                         <Label text="Submit New Request" styleClass="card-title" />
                         <GridPane hgap="20.0" vgap="15.0">
@@ -159,6 +162,25 @@
                                 <TableColumn fx:id="historyStatusCol" text="Status" prefWidth="150.0" />
                             </columns>
                         </TableView>
+                    </VBox>
+                </VBox>
+                
+                <VBox fx:id="salaryVBox" spacing="20.0" maxWidth="900.0" alignment="TOP_LEFT" visible="false">
+                    <Label text="My Payslips" styleClass="title-2" />
+                    <VBox styleClass="card" VBox.vgrow="ALWAYS" style="-fx-padding: 20;" spacing="15.0">
+                        <TableView fx:id="salaryTable" prefHeight="350.0">
+                            <columns>
+                                <TableColumn fx:id="salMonthCol" text="Month" prefWidth="150.0" />
+                                <TableColumn fx:id="salBaseCol" text="Base Salary" prefWidth="150.0" />
+                                <TableColumn fx:id="salDedCol" text="Deductions" prefWidth="120.0" />
+                                <TableColumn fx:id="salNetCol" text="Net Salary" prefWidth="150.0" />
+                                <TableColumn fx:id="salDateCol" text="Date Paid" prefWidth="150.0" />
+                            </columns>
+                        </TableView>
+                        <HBox alignment="CENTER_LEFT" spacing="15.0">
+                            <Button text="🖨️ Print Selected Payslip" onAction="#handlePrintPayslip" styleClass="primary-btn" style="-fx-background-color: #4F46E5; -fx-padding: 10 20;" />
+                            <Label fx:id="salaryStatusLabel" />
+                        </HBox>
                     </VBox>
                 </VBox>
 

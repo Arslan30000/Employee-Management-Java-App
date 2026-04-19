@@ -63,6 +63,10 @@
                 <Label styleClass="sidebar-icon" text="📅" textFill="#64748B"><font><Font size="20.0" /></font></Label>
                 <Label styleClass="sidebar-text" text="Leave Approvals" textFill="#475569"><font><Font size="15.0" /></font></Label>
             </HBox>
+            <HBox fx:id="payrollBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showPayroll">
+                <Label styleClass="sidebar-icon" text="💵" textFill="#64748B"><font><Font size="20.0" /></font></Label>
+                <Label styleClass="sidebar-text" text="Run Payroll" textFill="#475569"><font><Font size="15.0" /></font></Label>
+            </HBox>
             <HBox fx:id="settingsBtn" styleClass="sidebar-btn" alignment="CENTER_LEFT" spacing="16.0" onMouseClicked="#showSettings">
                 <Label styleClass="sidebar-icon" text="⚙️" textFill="#64748B"><font><Font size="20.0" /></font></Label>
                 <Label styleClass="sidebar-text" text="Change Password" textFill="#475569"><font><Font size="15.0" /></font></Label>
@@ -161,6 +165,30 @@
                             <Button text="❌ Reject Selected" onAction="#handleRejectLeave" styleClass="primary-btn" style="-fx-background-color: #DC2626;" />
                             <Label fx:id="leaveAdminStatusLabel" />
                         </HBox>
+                    </VBox>
+                </VBox>
+
+                <VBox fx:id="payrollVBox" spacing="20.0" maxWidth="900.0" alignment="TOP_LEFT" visible="false">
+                    <Label text="Monthly Payroll Generation" styleClass="title-2" />
+                    <HBox spacing="15.0" alignment="CENTER_LEFT" styleClass="card" style="-fx-padding: 20;">
+                        <Label text="Select Month:" style="-fx-font-weight: bold; -fx-text-fill: #334155;" />
+                        <ComboBox fx:id="monthComboBox" prefWidth="200.0" styleClass="modern-input" />
+                        <Button text="🚀 Run Automated Payroll" onAction="#handleRunPayroll" styleClass="primary-btn" style="-fx-background-color: #10B981;" />
+                        <Label fx:id="payrollStatusLabel" />
+                    </HBox>
+                    <VBox styleClass="card" VBox.vgrow="ALWAYS" style="-fx-padding: 20;">
+                        <Label text="Payroll History" styleClass="card-title" />
+                        <TableView fx:id="payrollTable" prefHeight="350.0">
+                            <columns>
+                                <TableColumn fx:id="payEmpIdCol" text="Emp ID" prefWidth="100.0" />
+                                <TableColumn fx:id="payNameCol" text="Name" prefWidth="180.0" />
+                                <TableColumn fx:id="payMonthCol" text="Month" prefWidth="120.0" />
+                                <TableColumn fx:id="payBaseCol" text="Base Salary" prefWidth="120.0" />
+                                <TableColumn fx:id="payDedCol" text="Deductions" prefWidth="100.0" />
+                                <TableColumn fx:id="payNetCol" text="Net Salary" prefWidth="120.0" />
+                                <TableColumn fx:id="payDateCol" text="Date Paid" prefWidth="120.0" />
+                            </columns>
+                        </TableView>
                     </VBox>
                 </VBox>
 
